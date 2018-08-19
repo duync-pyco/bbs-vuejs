@@ -51,6 +51,8 @@ export default {
   },
   created() {
     this.getArticle();
+    ++this.article.views;
+    Storage.update(this.article);
   }
 };
 </script>
