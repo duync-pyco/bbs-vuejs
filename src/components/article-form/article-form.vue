@@ -22,9 +22,17 @@ const emptyArticle = {
 
 export default {
   components: { Button },
+  props: {
+    initArticle: {
+      type: Object,
+      default() {
+        return { ...emptyArticle };
+      }
+    }
+  },
   data() {
     return {
-      article: { ...emptyArticle }
+      article: { ...this.initArticle }
     };
   },
   methods: {

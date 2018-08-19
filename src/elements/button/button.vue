@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="handleClick">
+  <button @click="handleClick">
     <slot></slot>
   </button>
 </template>

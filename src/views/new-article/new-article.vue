@@ -12,7 +12,7 @@ export default {
   methods: {
     handleSubmit(article) {
       Storage.create(article);
-      this.$router.push("articles");
+      this.$router.push("/articles");
     }
   }
 };

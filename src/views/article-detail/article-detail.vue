@@ -38,7 +38,9 @@ export default {
       this.id = parseInt(this.$router.currentRoute.params.id);
       this.article = Storage.getById(parseInt(this.id, 10));
     },
-    handleEditClick() {},
+    handleEditClick() {
+      this.$router.push(`/edit-article/${this.id}`);
+    },
     handleDeleteClick() {
       const confirmation = confirm("Are you sure?");
       if (confirmation === true) {
