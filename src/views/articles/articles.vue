@@ -1,7 +1,11 @@
 <template>
   <div id="container">
     <ul id="articles-list">
-      <li id="article-item" v-for="article in processedArticles" :key="article.id">
+      <li
+        class="article-item"
+        v-for="article in processedArticles" :key="article.id"
+        @click.prevent="handleArticleClick(article.id)"
+      >
         <ArticleItem v-bind="article"/>
       </li>
     </ul>
@@ -72,6 +76,9 @@ export default {
     }
   },
   methods: {
+    handleArticleClick(id) {
+      this.$router.push(`/article/${id}`);
+    },
     syncParams() {
       const { params } = this.$router.currentRoute;
 

@@ -6,8 +6,15 @@ if (!localStorage.getItem(dbName)) {
   localStorage.setItem(dbName, JSON.stringify(sampleData));
 }
 
-export const getAll = () => {
-  return JSON.parse(localStorage.getItem(dbName));
+export const getAll = () => JSON.parse(localStorage.getItem(dbName));
+
+export const getById = id => {
+  const articles = JSON.parse(localStorage.getItem(dbName));
+  const index = articles.findIndex(value => value.id === id);
+
+  if (index < 0) return null;
+
+  return articles[index];
 };
 
 export const create = article => {
@@ -54,6 +61,7 @@ export const remove = id => {
 
 export default {
   getAll,
+  getById,
   create,
   update,
   remove

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import NewArticle from "@/views/new-article/new-article";
 import Articles from "@/views/articles/articles";
+import ArticleDetail from "@/views/article-detail/article-detail";
 
 Vue.use(Router);
 
@@ -16,6 +17,11 @@ export default new Router({
       path: "/articles/:pageSize?/:pageIndex?",
       name: "Articles",
       component: Articles
+    },
+    {
+      path: "/article/:id",
+      name: "Article Detail",
+      component: ArticleDetail
     },
     {
       path: "*",
