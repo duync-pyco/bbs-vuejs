@@ -2,7 +2,7 @@
   <div id="app">
     <NavigationBar :title="$router.currentRoute.name"/>
     <hr />
-    <div class="bbsapp">
+    <div id="app-container">
       <router-view />
     </div>
   </div>

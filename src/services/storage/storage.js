@@ -1,4 +1,4 @@
-import sampleData from "@fixtures/sample-data.json";
+import sampleData from "@/fixtures/sample-data.json";
 const _dbName = "duync-bbs";
 
 if (!localStorage.getItem(_dbName)) {
@@ -6,7 +6,7 @@ if (!localStorage.getItem(_dbName)) {
 }
 
 export const getAll = () => {
-  return localStorage.getItem(_dbName);
+  return JSON.parse(localStorage.getItem(_dbName));
 };
 
 export const create = article => {
