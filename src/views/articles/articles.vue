@@ -1,22 +1,29 @@
 <template>
   <div id="container">
-    <ul>
-      <li id="article" v-for="article in processedArticles" :key="article.id">
+    <ul id="articles-list">
+      <li id="article-item" v-for="article in processedArticles" :key="article.id">
         <ArticleItem v-bind="article"/>
       </li>
     </ul>
     <hr>
-    <div id="select-container">
-      <span id="select-label">Articles per page</span>
-      <select name="Articles per page" v-model="pageSize">
-        <option
-          v-for="(pageSizeOption, index) in pageSizeOptions"
-          :key="index"
-          :value=pageSizeOption
-        >
-          {{ pageSizeOption }} items
-        </option>
-      </select>
+    <div id="footer-container">
+      <div id="select-container">
+        <span id="select-label">Articles per page</span>
+        <select name="Articles per page" v-model="pageSize">
+          <option
+            v-for="(pageSizeOption, index) in pageSizeOptions"
+            :key="index"
+            :value=pageSizeOption
+          >
+            {{ pageSizeOption }} items
+          </option>
+        </select>
+      </div>
+      <div id="pagination-container">
+        <Button class="pagination-button" @click="decreaseIndex()">Back</Button>
+        <span id="pagination-index">Page {{ pageIndex }}</span>
+        <Button class="pagination-button" @click="increaseIndex()">Next</Button>
+      </div>
     </div>
   </div>
 </template>
@@ -24,8 +31,10 @@
 <script>
 import Storage from "@/services/storage/storage.js";
 import ArticleItem from "@/components/article-item/article-item";
+import Button from "@/elements/button/button";
 
 export default {
+  components: { ArticleItem, Button },
   data() {
     return {
       articles: [],
@@ -41,6 +50,9 @@ export default {
     end() {
       return this.start + this.pageSize;
     },
+    total() {
+      return this.articles.length;
+    },
     processedArticles() {
       return this.articles
         .sort((a, b) => a.id < b.id)
@@ -49,13 +61,47 @@ export default {
   },
   watch: {
     pageSize() {
+      this.pageIndex = 1;
       this.$router.replace({ params: { pageSize: this.pageSize } });
+    },
+    pageIndex() {
+      this.$router.replace({ params: { pageIndex: this.pageIndex } });
+    },
+    $route() {
+      this.syncParams();
     }
   },
-  components: { ArticleItem },
+  methods: {
+    syncParams() {
+      const { params } = this.$router.currentRoute;
+
+      if (params && params.pageSize && params.pageIndex) this.getParams();
+      else this.updateParams();
+    },
+    getParams() {
+      const { params } = this.$router.currentRoute;
+
+      this.pageSize = parseInt(params.pageSize, 10);
+      this.pageIndex = parseInt(params.pageIndex, 10);
+    },
+    updateParams() {
+      this.$router.replace({
+        params: {
+          pageSize: this.pageSize,
+          pageIndex: this.pageIndex
+        }
+      });
+    },
+    increaseIndex() {
+      if (this.pageIndex * this.pageSize < this.total) ++this.pageIndex;
+    },
+    decreaseIndex() {
+      if (this.pageIndex > 1) --this.pageIndex;
+    }
+  },
   created() {
     this.articles = Storage.getAll();
-    this.$router.replace({ params: { pageSize: this.pageSize } });
+    this.syncParams();
   }
 };
 </script>

@@ -5,7 +5,7 @@
       <input type="text" name="author" placeholder="author" v-model.lazy="article.author" required />
       <input type="text" name="email" placeholder="email address" v-model.lazy="article.email" required />
       <textarea type="text" name="content" placeholder="content" cols="40" rows="5" v-model.lazy="article.content" required></textarea>
-      <Button id="button-submit" :text="'Submit'">Post</Button>
+      <Button id="submit-button">Submit</Button>
     </form>
   </div>
 </template>

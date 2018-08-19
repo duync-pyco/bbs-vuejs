@@ -13,7 +13,7 @@ export default new Router({
       component: NewArticle
     },
     {
-      path: "/articles/:pageSize?",
+      path: "/articles/:pageSize?/:pageIndex?",
       name: "Articles",
       component: Articles
     },

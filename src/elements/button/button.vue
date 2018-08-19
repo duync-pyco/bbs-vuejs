@@ -1,14 +1,19 @@
 <template>
-  <button>{{ text }}</button>
+  <button @click.prevent="handleClick">
+    <slot></slot>
+  </button>
 </template>
 
 <script>
 export default {
-  props: {
-    text: { type: String, default: "" }
+  methods: {
+    handleClick() {
+      this.$emit("click");
+    }
   }
 };
 </script>
+
 
 <style scoped>
 @import "./button.css";
