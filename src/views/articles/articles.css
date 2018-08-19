@@ -7,3 +7,14 @@
   padding-right: 40px;
   margin-bottom: 50px;
 }
+#select-container {
+  padding-top: 20px;
+}
+#select-label {
+  font-size: 25px;
+  font-weight: 25px;
+  padding: 10px;
+}
+select {
+  font-size: 15px;
+}
