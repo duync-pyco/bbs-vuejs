@@ -1,10 +1,10 @@
 <template>
   <div>
-    <form>
-      <input type="text" name="title" placeholder="title" autofocus required />
-      <input type="text" name="author" placeholder="author" required />
-      <input type="text" name="email" placeholder="email address" required />
-      <textarea type="text" name="content" placeholder="content" cols="40" rows="5" required></textarea>
+    <form @submit.prevent="handleSubmit">
+      <input type="text" name="title" placeholder="title" v-model.lazy="article.title" autofocus required />
+      <input type="text" name="author" placeholder="author" v-model.lazy="article.author" required />
+      <input type="text" name="email" placeholder="email address" v-model.lazy="article.email" required />
+      <textarea type="text" name="content" placeholder="content" cols="40" rows="5" v-model.lazy="article.content" required></textarea>
       <Button id="button-submit" :text="'Submit'">Post</Button>
     </form>
   </div>
@@ -12,8 +12,27 @@
 
 <script>
 import Button from "@/elements/button/button";
+
+const emptyArticle = {
+  title: "",
+  author: "",
+  email: "",
+  content: ""
+};
+
 export default {
-  components: { Button }
+  components: { Button },
+  data() {
+    return {
+      article: { ...emptyArticle }
+    };
+  },
+  methods: {
+    handleSubmit() {
+      this.$emit("submit", { ...this.article });
+      this.article = { ...emptyArticle };
+    }
+  }
 };
 </script>
 

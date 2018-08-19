@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <ul>
-      <li id="article" v-for="article in articles" :key="article.id">
+      <li id="article" v-for="article in sortedArticles" :key="article.id">
         <ArticleItem v-bind="article"/>
       </li>
     </ul>
@@ -17,6 +17,11 @@ export default {
     return {
       articles: []
     };
+  },
+  computed: {
+    sortedArticles() {
+      return this.articles.sort((a, b) => a.id < b.id);
+    }
   },
   components: { ArticleItem },
   created() {
