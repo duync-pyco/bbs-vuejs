@@ -3,7 +3,9 @@
     <NavigationBar :title="$router.currentRoute.name"/>
     <hr />
     <div id="app-container">
-      <router-view />
+      <transition name="slide" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
