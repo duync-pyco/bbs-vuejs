@@ -3,15 +3,18 @@ import Storage from "@/services/storage/storage";
 const getAll = async ({ commit }) => {
   const data = await Storage.getAll();
   commit("updateArticles", { data });
+  return data;
 };
 
 const addNewArticle = async (_, { article }) => {
-  await Storage.create(article);
+  const newArticle = await Storage.create(article);
+  return newArticle;
 };
 
 const updateArticle = async ({ commit }, { article }) => {
   const updatedArticle = await Storage.update(article);
   commit("updateCurrentArticle", { article: updatedArticle });
+  return updatedArticle;
 };
 
 const getArticleById = async ({ commit }, { id }) => {
@@ -21,7 +24,8 @@ const getArticleById = async ({ commit }, { id }) => {
 };
 
 const removeArticle = async (_, { id }) => {
-  await Storage.remove(id);
+  const deletedArticle = await Storage.remove(id);
+  return deletedArticle;
 };
 
 export default {

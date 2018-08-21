@@ -35,6 +35,11 @@ export default {
       article: { ...this.initArticle }
     };
   },
+  watch: {
+    initArticle() {
+      this.article = { ...this.initArticle };
+    }
+  },
   methods: {
     handleSubmit() {
       this.$emit("submit", { ...this.article });

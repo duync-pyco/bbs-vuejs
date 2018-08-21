@@ -1,14 +1,28 @@
 <template>
-  <ArticleForm :initArticle="this.article" @submit="this.handleSubmit"/>
+  <div>
+    <ArticleForm
+      v-if="!!article"
+      :initArticle="article"
+      @submit="handleSubmit"
+    />
+    <h3 v-else>Item not found</h3>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 import Storage from "@/services/storage/storage";
 import ArticleForm from "@/components/article-form/article-form";
 
 export default {
   name: "NewArticle",
   components: { ArticleForm },
+  computed: {
+    ...mapGetters({
+      article: "articles/currentArticle"
+    })
+  },
   watch: {
     $route() {
       this.getArticle();
@@ -16,16 +30,23 @@ export default {
   },
   methods: {
     handleSubmit(article) {
-      Storage.update({
-        ...article,
-        updatedAt: new Date().toString()
+      this.updateArticle({
+        article: {
+          ...article,
+          updatedAt: new Date().toString()
+        }
+      }).then(() => {
+        this.$router.push("/articles");
       });
-      this.$router.push("/articles");
     },
     getArticle() {
       this.id = parseInt(this.$router.currentRoute.params.id);
-      this.article = Storage.getById(parseInt(this.id, 10));
-    }
+      this.getArticleById({ id: this.id });
+    },
+    ...mapActions({
+      getArticleById: "articles/getArticleById",
+      updateArticle: "articles/updateArticle"
+    })
   },
   created() {
     this.getArticle();
