@@ -1,30 +1,35 @@
 import Storage from "@/services/storage/storage";
+import ArticleApi from "@/services/api/articles";
 
 const getAll = async ({ commit }) => {
-  const data = await Storage.getAll();
+  const data = await ArticleApi.getAll();
   commit("updateArticles", { data });
   return data;
 };
 
+const getArticleById = async ({ commit }, { id }) => {
+  try {
+    const article = await ArticleApi.getById(id);
+    commit("updateCurrentArticle", { article });
+    return article;
+  } catch (error) {
+    commit("updateCurrentArticle", { article: null });
+    return null;
+  }
+};
+
 const addNewArticle = async (_, { article }) => {
-  const newArticle = await Storage.create(article);
+  const newArticle = await ArticleApi.create(article);
   return newArticle;
 };
 
 const updateArticle = async ({ commit }, { article }) => {
-  const updatedArticle = await Storage.update(article);
-  commit("updateCurrentArticle", { article: updatedArticle });
-  return updatedArticle;
-};
-
-const getArticleById = async ({ commit }, { id }) => {
-  const article = await Storage.getById(id);
+  await ArticleApi.update(article);
   commit("updateCurrentArticle", { article });
-  return article;
 };
 
 const removeArticle = async (_, { id }) => {
-  const deletedArticle = await Storage.remove(id);
+  const deletedArticle = await ArticleApi.remove(id);
   return deletedArticle;
 };
 

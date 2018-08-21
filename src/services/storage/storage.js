@@ -1,3 +1,5 @@
+// Legacy, no more being used
+
 import sampleData from "@/fixtures/sample-data.json";
 
 const dbName = "duync-bbs";
