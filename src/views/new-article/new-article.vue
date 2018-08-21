@@ -12,8 +12,9 @@ export default {
   components: { ArticleForm },
   methods: {
     handleSubmit(article) {
-      this.addNewArticle({ article });
-      this.$router.push("/articles");
+      this.addNewArticle({ article }).then(() => {
+        this.$router.push("/articles");
+      });
     },
     ...mapActions({
       addNewArticle: "articles/addNewArticle"

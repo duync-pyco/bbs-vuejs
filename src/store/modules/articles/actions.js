@@ -20,9 +20,14 @@ const getArticleById = async ({ commit }, { id }) => {
   return article;
 };
 
+const removeArticle = async (_, { id }) => {
+  await Storage.remove(id);
+};
+
 export default {
   getAll,
   addNewArticle,
   updateArticle,
-  getArticleById
+  getArticleById,
+  removeArticle
 };

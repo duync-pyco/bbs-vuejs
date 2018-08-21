@@ -46,13 +46,15 @@ export default {
     handleDeleteClick() {
       const confirmation = confirm("Are you sure?");
       if (confirmation === true) {
-        Storage.remove(this.id);
-        this.$router.push("/articles");
+        this.removeArticle({ id: this.id }).then(() => {
+          this.$router.push("/articles");
+        });
       }
     },
     ...mapActions({
       getArticleById: "articles/getArticleById",
-      updateArticle: "articles/updateArticle"
+      updateArticle: "articles/updateArticle",
+      removeArticle: "articles/removeArticle"
     }),
     getArticle() {
       this.id = parseInt(this.$router.currentRoute.params.id);

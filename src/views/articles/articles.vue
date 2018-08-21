@@ -113,8 +113,9 @@ export default {
     })
   },
   created() {
-    this.getAll();
-    this.syncParams();
+    this.getAll().then(() => {
+      this.syncParams();
+    });
   }
 };
 </script>
