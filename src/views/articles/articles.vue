@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import Storage from "@/services/storage/storage.js";
 import ArticleItem from "@/components/article-item/article-item";
 import Button from "@/elements/button/button";
@@ -41,7 +42,6 @@ export default {
   components: { ArticleItem, Button },
   data() {
     return {
-      articles: [],
       pageSizeOptions: [1, 2, 3, 5, 8],
       pageSize: 2,
       pageIndex: 1
@@ -59,9 +59,12 @@ export default {
     },
     processedArticles() {
       return this.articles
-        .sort((a, b) => a.id < b.id)
+        .sort((a, b) => b.id - a.id)
         .slice(this.start, this.end);
-    }
+    },
+    ...mapGetters({
+      articles: "articles/data"
+    })
   },
   watch: {
     pageSize() {
@@ -104,10 +107,13 @@ export default {
     },
     decreaseIndex() {
       if (this.pageIndex > 1) --this.pageIndex;
-    }
+    },
+    ...mapActions({
+      getAll: "articles/getAll"
+    })
   },
   created() {
-    this.articles = Storage.getAll();
+    this.getAll();
     this.syncParams();
   }
 };

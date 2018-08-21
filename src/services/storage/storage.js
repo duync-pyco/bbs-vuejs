@@ -30,33 +30,31 @@ export const create = article => {
   articles.push(newArticle);
   localStorage.setItem(dbName, JSON.stringify(articles));
 
-  return newArticle;
+  return articles;
 };
 
 export const update = article => {
   const articles = JSON.parse(localStorage.getItem(dbName));
   const index = articles.findIndex(value => value.id === article.id);
 
-  if (index < 0) return null;
+  if (index < 0) return articles;
 
   articles[index] = article;
   localStorage.setItem(dbName, JSON.stringify(articles));
 
-  return article[index];
+  return articles;
 };
 
 export const remove = id => {
   const articles = JSON.parse(localStorage.getItem(dbName));
   const index = articles.findIndex(value => value.id === id);
 
-  if (index < 0) return null;
-
-  const removedArticle = articles[index];
+  if (index < 0) return articles;
 
   articles.splice(index, 1);
   localStorage.setItem(dbName, JSON.stringify(articles));
 
-  return removedArticle;
+  return articles;
 };
 
 export default {
