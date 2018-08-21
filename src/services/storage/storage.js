@@ -30,7 +30,7 @@ export const create = article => {
   articles.push(newArticle);
   localStorage.setItem(dbName, JSON.stringify(articles));
 
-  return articles;
+  return newArticle;
 };
 
 export const update = article => {
