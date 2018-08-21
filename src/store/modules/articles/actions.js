@@ -16,7 +16,7 @@ const updateArticle = async ({ commit }, { article }) => {
 
 const getArticleById = async ({ commit }, { id }) => {
   const article = await Storage.getById(id);
-  if (article) commit("updateCurrentArticle", { article });
+  commit("updateCurrentArticle", { article });
   return article;
 };
 

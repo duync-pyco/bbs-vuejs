@@ -24,11 +24,6 @@ import Button from "@/elements/button/button";
 
 export default {
   components: { ArticleItem, Button },
-  data() {
-    return {
-      id: 0
-    };
-  },
   computed: {
     ...mapGetters({
       article: "articles/currentArticle"
