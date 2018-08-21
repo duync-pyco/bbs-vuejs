@@ -37,12 +37,12 @@ export const update = article => {
   const articles = JSON.parse(localStorage.getItem(dbName));
   const index = articles.findIndex(value => value.id === article.id);
 
-  if (index < 0) return articles;
+  if (index < 0) return null;
 
   articles[index] = article;
   localStorage.setItem(dbName, JSON.stringify(articles));
 
-  return articles;
+  return article;
 };
 
 export const remove = id => {

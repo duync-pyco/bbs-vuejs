@@ -9,7 +9,20 @@ const addNewArticle = async (_, { article }) => {
   await Storage.create(article);
 };
 
+const updateArticle = async ({ commit }, { article }) => {
+  const updatedArticle = await Storage.update(article);
+  commit("updateCurrentArticle", { article: updatedArticle });
+};
+
+const getArticleById = async ({ commit }, { id }) => {
+  const article = await Storage.getById(id);
+  if (article) commit("updateCurrentArticle", { article });
+  return article;
+};
+
 export default {
   getAll,
-  addNewArticle
+  addNewArticle,
+  updateArticle,
+  getArticleById
 };
