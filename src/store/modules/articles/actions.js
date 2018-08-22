@@ -1,47 +1,40 @@
-import ArticleApi from "@/services/api/articles";
+import ArticleApi from "../../../services/api/articles";
+import handleAction from "../../../helpers/handle-actions/handle-actions";
 import { ACTIONS, MUTATIONS } from "./constants";
-import { MUTATIONS as APP_MUTATIONS } from "../app/constants";
 
-const wrapLoading = async (commit, fn) => {
-  commit(APP_MUTATIONS.UPDATE_LOADING, { isLoading: true });
-  const res = await fn();
-  commit(APP_MUTATIONS.UPDATE_LOADING, { isLoading: false });
-  return res;
-};
-
-const getAll = async ({ commit }) =>
-  wrapLoading(commit, async () => {
+const getAll = async context =>
+  handleAction(context, async () => {
     const data = await ArticleApi.getAll();
-    commit(MUTATIONS.UPDATE, { data });
+    context.commit(MUTATIONS.UPDATE, { data });
     return data;
   });
 
-const getArticleById = async ({ commit }, { id }) =>
-  wrapLoading(commit, async () => {
+const getArticleById = async (context, { id }) =>
+  handleAction(context, async () => {
     try {
       const article = await ArticleApi.getById(id);
-      commit(MUTATIONS.UPDATE_CURRENT, { article });
+      context.commit(MUTATIONS.UPDATE_CURRENT, { article });
       return article;
     } catch (error) {
-      commit(MUTATIONS.UPDATE_CURRENT, { article: null });
+      context.commit(MUTATIONS.UPDATE_CURRENT, { article: null });
       return null;
     }
   });
 
-const addNewArticle = async ({ commit }, { article }) =>
-  wrapLoading(commit, async () => {
+const addNewArticle = async (context, { article }) =>
+  handleAction(context, async () => {
     const newArticle = await ArticleApi.create(article);
     return newArticle;
   });
 
-const updateArticle = async ({ commit }, { article }) =>
-  wrapLoading(commit, async () => {
+const updateArticle = async (context, { article }) =>
+  handleAction(context, async () => {
     await ArticleApi.update(article);
-    commit(MUTATIONS.UPDATE_CURRENT, { article });
+    context.commit(MUTATIONS.UPDATE_CURRENT, { article });
   });
 
-const removeArticle = async ({ commit }, { id }) =>
-  wrapLoading(commit, async () => {
+const removeArticle = async (context, { id }) =>
+  handleAction(context, async () => {
     const deletedArticle = await ArticleApi.remove(id);
     return deletedArticle;
   });

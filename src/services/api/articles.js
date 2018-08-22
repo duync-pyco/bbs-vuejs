@@ -27,13 +27,13 @@ export const create = async article => {
     views: 0
   };
 
-  const res = Axios.post(baseUrl, newArticle);
+  const res = await Axios.post(baseUrl, newArticle);
   return res.data;
 };
 
 export const update = async article => {
   await asyncTimeout(500);
-  const res = Axios.put(`${baseUrl}/${article.id}`, article);
+  const res = await Axios.put(`${baseUrl}/${article.id}`, article);
   return res.data;
 };
 

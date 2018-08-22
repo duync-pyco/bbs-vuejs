@@ -43,7 +43,6 @@ export default {
   methods: {
     handleSubmit() {
       this.$emit("submit", { ...this.article });
-      this.article = { ...emptyArticle };
     }
   }
 };

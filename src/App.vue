@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <LoadingMask />
+    <notifications group="app"/>
     <NavigationBar :title="$router.currentRoute.name"/>
     <hr />
     <div id="app-container">
