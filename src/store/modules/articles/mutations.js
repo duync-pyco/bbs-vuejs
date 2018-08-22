@@ -6,7 +6,12 @@ const updateCurrentArticle = (state, { article }) => {
   state.currentArticle = article;
 };
 
+const updateLoading = (state, { isLoading }) => {
+  state.isLoading = isLoading;
+};
+
 export default {
   updateArticles,
-  updateCurrentArticle
+  updateCurrentArticle,
+  updateLoading
 };

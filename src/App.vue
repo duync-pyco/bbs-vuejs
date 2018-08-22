@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <LoadingMask />
     <NavigationBar :title="$router.currentRoute.name"/>
     <hr />
     <div id="app-container">
@@ -12,10 +13,11 @@
 
 <script>
 import NavigationBar from "@/components/navigation-bar/navigation-bar";
+import LoadingMask from "@/components/loading-mask/loading-mask";
 
 export default {
   name: "App",
-  components: { NavigationBar }
+  components: { NavigationBar, LoadingMask }
 };
 </script>
 

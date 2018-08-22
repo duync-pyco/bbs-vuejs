@@ -3,7 +3,7 @@
     <form @submit.prevent="handleSubmit">
       <input type="text" name="title" placeholder="title" v-model.lazy="article.title" autofocus required />
       <input type="text" name="author" placeholder="author" v-model.lazy="article.author" required />
-      <input type="text" name="email" placeholder="email address" v-model.lazy="article.email" required />
+      <input type="email" name="email" placeholder="email address" v-model.lazy="article.email" required />
       <textarea type="text" name="content" placeholder="content" cols="40" rows="5" v-model.lazy="article.content" required></textarea>
       <Button id="submit-button">Submit</Button>
     </form>

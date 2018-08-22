@@ -4,7 +4,8 @@ import getters from "./getters";
 
 const state = () => ({
   data: [],
-  currentArticle: null
+  currentArticle: null,
+  isLoading: false
 });
 
 export default {
