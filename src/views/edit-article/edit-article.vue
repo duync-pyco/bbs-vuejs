@@ -12,7 +12,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
-import Storage from "@/services/storage/storage";
+import { GETTERS, ACTIONS } from "../../store/modules/articles/constants";
 import ArticleForm from "@/components/article-form/article-form";
 
 export default {
@@ -20,7 +20,7 @@ export default {
   components: { ArticleForm },
   computed: {
     ...mapGetters({
-      article: "articles/currentArticle"
+      article: GETTERS.CURRENT_ARTICLE
     })
   },
   watch: {
@@ -44,8 +44,8 @@ export default {
       this.getArticleById({ id: this.id });
     },
     ...mapActions({
-      getArticleById: "articles/getArticleById",
-      updateArticle: "articles/updateArticle"
+      getArticleById: ACTIONS.GET_BY_ID,
+      updateArticle: ACTIONS.UPDATE
     })
   },
   created() {

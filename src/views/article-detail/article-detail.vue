@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
-import Storage from "@/services/storage/storage";
+import { GETTERS, ACTIONS } from "../../store/modules/articles/constants";
 import ArticleItem from "@/components/article-item/article-item";
 import Button from "@/elements/button/button";
 
@@ -26,7 +26,7 @@ export default {
   components: { ArticleItem, Button },
   computed: {
     ...mapGetters({
-      article: "articles/currentArticle"
+      article: GETTERS.CURRENT_ARTICLE
     })
   },
   watch: {
@@ -47,9 +47,9 @@ export default {
       }
     },
     ...mapActions({
-      getArticleById: "articles/getArticleById",
-      updateArticle: "articles/updateArticle",
-      removeArticle: "articles/removeArticle"
+      getArticleById: ACTIONS.GET_BY_ID,
+      updateArticle: ACTIONS.UPDATE,
+      removeArticle: ACTIONS.REMOVE
     }),
     getArticle() {
       this.id = parseInt(this.$router.currentRoute.params.id);

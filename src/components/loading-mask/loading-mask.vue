@@ -6,10 +6,13 @@
 
 <script>
 import { mapGetters } from "vuex";
+
+import { GETTERS } from "../../store/modules/app/constants";
+
 export default {
   computed: {
     ...mapGetters({
-      isLoading: "articles/isLoading"
+      isLoading: GETTERS.IS_LOADING
     })
   }
 };

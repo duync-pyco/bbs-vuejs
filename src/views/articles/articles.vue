@@ -34,7 +34,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Storage from "@/services/storage/storage.js";
+
+import { GETTERS, ACTIONS } from "../../store/modules/articles/constants";
 import ArticleItem from "@/components/article-item/article-item";
 import Button from "@/elements/button/button";
 
@@ -63,7 +64,7 @@ export default {
         .slice(this.start, this.end);
     },
     ...mapGetters({
-      articles: "articles/data"
+      articles: GETTERS.DATA
     })
   },
   watch: {
@@ -109,7 +110,7 @@ export default {
       if (this.pageIndex > 1) --this.pageIndex;
     },
     ...mapActions({
-      getAll: "articles/getAll"
+      getAll: ACTIONS.GET_ALL
     })
   },
   created() {

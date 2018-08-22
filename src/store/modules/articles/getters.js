@@ -1,9 +1,9 @@
+import { GETTERS } from "./constants";
+
 const data = state => state.data;
 const currentArticle = state => state.currentArticle;
-const isLoading = state => state.isLoading;
 
 export default {
-  data,
-  currentArticle,
-  isLoading
+  [GETTERS.DATA]: data,
+  [GETTERS.CURRENT_ARTICLE]: currentArticle
 };

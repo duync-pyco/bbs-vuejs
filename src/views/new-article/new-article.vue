@@ -4,7 +4,8 @@
 
 <script>
 import { mapActions } from "vuex";
-import Storage from "@/services/storage/storage";
+
+import { ACTIONS } from "../../store/modules/articles/constants";
 import ArticleForm from "@/components/article-form/article-form";
 
 export default {
@@ -17,7 +18,7 @@ export default {
       });
     },
     ...mapActions({
-      addNewArticle: "articles/addNewArticle"
+      addNewArticle: ACTIONS.ADD
     })
   }
 };
